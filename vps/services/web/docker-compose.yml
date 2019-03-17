@@ -13,7 +13,7 @@ services:
       # URL field must be working since nginx only starts if letsencrypt works
       URL: seaturtle.pw
       SUBDOMAINS: peugeot
-      EXTRA_DOMAINS: #www.paul.walko.org,paul.walko.org
+      EXTRA_DOMAINS: www.paul.walko.org,paul.walko.org
       VALIDATION: html # TODO Switch to dns + gandi api once pr is merged
       TZ: America/New_York
     volumes:
