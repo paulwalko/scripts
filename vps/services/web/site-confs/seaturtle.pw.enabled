@@ -14,16 +14,18 @@ server {
     }
 
     location /files {
+        alias /files;
         autoindex on;
     }
 
     location /sync {
         auth_basic "Restricted Content";
         auth_basic_user_file /secrets/htpasswd;
+        alias /sync;
         autoindex on;
     }
 
-    location /syncthing {
+    location /syncthing/ {
         proxy_set_header    X-Real-IP $remote_addr;
         proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header    X-Forwarded-Proto $scheme;

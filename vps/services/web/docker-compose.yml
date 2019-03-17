@@ -12,8 +12,8 @@ services:
       EMAIL: sysadmin@seaturtle.pw
       # URL field must be working since nginx only starts if letsencrypt works
       URL: seaturtle.pw
-      SUBDOMAINS: seaturtle
-      EXTRA_DOMAINS: www.paul.walko.org,paul.walko.org
+      SUBDOMAINS: peugeot
+      EXTRA_DOMAINS: #www.paul.walko.org,paul.walko.org
       VALIDATION: html # TODO Switch to dns + gandi api once pr is merged
       TZ: America/New_York
     volumes:
@@ -25,11 +25,13 @@ services:
       - ./ssl.conf:/config/nginx/ssl.conf:ro
       - ./site-confs:/config/nginx/site-confs:ro
       - ./jail.local:/config/jail2ban/jail.local:ro
+      # etc files
+      - /home/joe/docker/syncthing/sync:/sync:ro
     ports:
-      - 128.173.88.78:80:80
-      - 128.173.88.78:443:443
-      - 2607:b400:0006:cc80:0000:0aff:fe62:000b:80:80
-      - 2607:b400:0006:cc80:0000:0aff:fe62:000b:443:443
+      - 10.21.2.155:80:80
+      - 10.21.2.155:443:443
+      - 2001:bc8:4728:8d0d::1:80:80
+      - 2001:bc8:4728:8d0d::1:443:443
 
   syncthing:
     restart: unless-stopped
@@ -45,6 +47,3 @@ services:
     ports:
       - 22000:22000
       - 21027:21027/udp
-
-networks:
-  pew-net
