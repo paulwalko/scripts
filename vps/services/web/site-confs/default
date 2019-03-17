@@ -1,0 +1,16 @@
+## Based on version below; but heavily modified for LUUG
+## Version 2018/09/12 - Changelog: https://github.com/linuxserver/docker-letsencrypt/commits/master/root/defaults/default
+
+# This is the main file that will be pe present no matter what
+# Individual sites are specified in /config/nginx/sites/*.enabled
+
+# Redirect HTTP traffic to HTTPS
+server {
+    listen 80;
+    listen [::]:80 default_server:
+    server_name _;
+
+    return 301 https://$host$request_uri;
+}
+
+# Enabled sites are included in /config/nginx/nginx.conf
