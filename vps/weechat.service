@@ -6,7 +6,7 @@ After=network.target
 User=pew
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/bin/tmux -2 new-session -d -s irc /usr/bin/weechat
+ExecStart=/usr/bin/tmux new-session -d -s irc /usr/bin/weechat
 ExecStop=/usr/bin/tmux kill-session -t irc
 
 [Install]
