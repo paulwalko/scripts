@@ -32,4 +32,3 @@ server {
         proxy_pass https://paulwalko.github.io;
     }
 }
-

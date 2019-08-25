@@ -10,12 +10,11 @@ docker run \
     --env PGID=1000 \
     --env EMAIL=sysadmin@seaturtle.pw \
     --env URL=seaturtle.pw \
-    --env SUBDOMAINS=airsonic,manx,plex,syncthing,www \
+    --env SUBDOMAINS=airsonic,plex,syncthing,www \
     --env VALIDATION=html \
     --env TZ=US/Eastern \
     --volume $PWD/config:/config:rw \
     --volume $PWD/nginx.conf:/config/nginx/nginx.conf:ro \
-    --volume $PWD/ssl.conf:/config/nginx/ssl.conf:ro \
     --volume $PWD/site-confs:/config/nginx/site-confs:ro \
     --volume $PWD/jail.local:/config/jail2ban/jail.local:ro \
     --publish 10.42.0.203:80:80 \
