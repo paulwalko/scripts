@@ -8,7 +8,7 @@ docker run \
     --env PGID=1000 \
     --env EMAIL=sysadmin@seaturtle.pw \
     --env URL=seaturtle.pw \
-    --env SUBDOMAINS=birman,donskoy,fogcutter,madone,manx,sphynx,www \
+    --env SUBDOMAINS=airsonic,manx,plex,syncthing,www \
     --env VALIDATION=html \
     --env TZ=US/Eastern \
     --volume $PWD/config:/config:rw \
@@ -20,4 +20,5 @@ docker run \
     --publish 10.42.0.203:443:443 \
     --publish [2601:5c0:c100:6e65:96c6:91ff:feab:69e3]:80:80 \
     --publish [2601:5c0:c100:6e65:96c6:91ff:feab:69e3]:443:443 \
+    --network pew-net \
     linuxserver/letsencrypt:latest

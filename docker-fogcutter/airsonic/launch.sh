@@ -11,5 +11,5 @@ docker run \
     --volume /bigdata/media/music:/media/music:ro \
     --volume /bigdata/media/playlists:/media/playlists \
     --volume /bigdata/media/podcasts:/media/podcasts:ro \
-    --publish 10.42.0.203:4040:4040 \
+    --network pew-net \
     linuxserver/airsonic:latest

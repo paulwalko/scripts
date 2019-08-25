@@ -3,3 +3,5 @@ docker-fogcutter/airsonic/config
 docker-fogcutter/minecraft/data
 docker-fogcutter/nginx/config
 docker-fogcutter/plex/config
+docker-fogcutter/syncthing/config
+docker-fogcutter/syncthing/sync
