@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Assumes pew-net exists
+
 docker run \
     --name nginx \
     --detach \

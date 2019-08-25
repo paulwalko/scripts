@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# syncthing.seaturtle.pw
-# proxy port 8384
+# Assumes pew-net exists
 
 docker run \
     --name syncthing \

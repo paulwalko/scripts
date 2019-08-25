@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# plex.seaturtle.pw
-# proxy port 32400
+# Assumes pew-net exists
 
 docker run \
     --name plex \
