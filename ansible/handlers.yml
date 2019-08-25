@@ -1,0 +1,18 @@
+---
+- name: Restart systemd-logind service
+  service:
+    name: systemd-logind
+    state: restarted
+
+- name: Restart chrony service
+  service:
+    name: chrony
+    state: restarted
+
+- name: Restart sshd service
+  service:
+    name: sshd
+    state: restarted
+
+- name: Re-export exportfs
+  command: exportfs -arv

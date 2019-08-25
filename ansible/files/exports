@@ -1,0 +1,1 @@
+/bigdata    10.42.0.0/24(ro,all_squash,no_subtree_check) 10.200.0.0/24(rw,no_subtree_check,no_root_squash)

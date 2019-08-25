@@ -1,0 +1,35 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name seaturtle.pw www.seaturtle.pw;
+
+    return 301 https://seaturtle.pw$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name www.seaturtle.pw;
+
+    # ssl conf
+    include /config/nginx/ssl.conf;
+
+    return 301 https://seaturtle.pw$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name seaturtle.pw;
+
+    # ssl conf
+    include /config/nginx/ssl.conf;
+
+    client_max_body_size 1M;
+
+    # Main site
+    location / {
+        proxy_pass https://paulwalko.github.io;
+    }
+}
+
