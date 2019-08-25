@@ -1,1 +1,5 @@
 **/htpasswd
+docker-fogcutter/airsonic/config
+docker-fogcutter/minecraft/data
+docker-fogcutter/nginx/config
+docker-fogcutter/plex/config
