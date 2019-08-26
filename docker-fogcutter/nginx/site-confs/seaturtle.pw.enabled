@@ -27,7 +27,7 @@ server {
 
     client_max_body_size 1M;
 
-    # Main site
+    # Proxy main site
     location / {
         proxy_pass https://paulwalko.github.io;
     }

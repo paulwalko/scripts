@@ -13,5 +13,6 @@ docker run \
     --volume /bigdata/media/music:/media/music:ro \
     --volume /bigdata/media/playlists:/media/playlists \
     --volume /bigdata/media/podcasts:/media/podcasts:ro \
+    --volume /media-vtluug:/media/media-vtluug:ro \
     --network pew-net \
     linuxserver/airsonic:latest

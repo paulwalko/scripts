@@ -13,5 +13,5 @@ docker run \
     --volume /bigdata/media/movies:/media/movies:ro \
     --volume /bigdata/media/music:/media/music:ro \
     --volume /media-vtluug:/media/media-vtluug:ro \
-    --network pew-net \
+    --network host \
     linuxserver/plex:latest

@@ -1,0 +1,29 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name plex.seaturtle.pw;
+
+    return 301 https://plex.seaturtle.pw$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name plex.seaturtle.pw;
+
+    # ssl conf
+    include /config/nginx/ssl.conf;
+
+    # Proxy plex
+    # https://old.reddit.com/r/PleX/comments/3xz4ph/plex_behind_a_ssl_nginx_reverse_proxy/
+    # Use IP of docker interface on docker host since plex runs in host mode
+    location / {
+        proxy_pass                         http://172.17.0.1:32400;
+        proxy_read_timeout                 240;
+        proxy_redirect                     off;
+        proxy_buffering                    off;
+        proxy_set_header Host              $host;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+    }
+}
