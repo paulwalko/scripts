@@ -167,7 +167,7 @@
         src: pew-media@dirtycow.vtluug.org:/nfs/cistern/share/media
         path: /media-vtluug
         fstype: fuse.sshfs
-        opts: allow_other,ro,_netdev,IdentityFile=/home/paul/.ssh/id_rsa
+        opts: allow_other,ro,_netdev,IdentityFile=/home/paul/.ssh/id_rsa_fast
         state: mounted
 
     - name: Add Docker GPG key
