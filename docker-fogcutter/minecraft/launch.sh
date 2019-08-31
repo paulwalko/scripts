@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Make data dir (as non-root) before launching
+
 docker run \
     --name minecraft \
     --detach \

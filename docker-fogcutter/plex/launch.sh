@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Assumes pew-net exists
+# Make config dir (as non-root) before launching
 
 docker run \
     --name plex \
