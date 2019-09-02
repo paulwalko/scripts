@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import json
 from selenium import webdriver
 from selenium.webdriver.common.by import By

@@ -1,0 +1,51 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name madone.seaturtle.pw;
+
+    return 301 https://seaturtle.pw$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name madone.seaturtle.pw;
+
+    # ssl conf
+    include /config/nginx/ssl.conf;
+
+    client_max_body_size 1M;
+
+    # Proxy syncthing
+    location /syncthing/ {
+        auth_basic "not today buddy";
+        auth_basic_user_file /config/nginx/syncthing-htpasswd;
+        proxy_set_header X-Real_IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-proto $scheme;
+        proxy_pass http://syncthing:8384/;
+    }
+
+    # Proxy weechat
+    location /weechat {
+        proxy_pass http://172.17.0.1:9001;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_read_timeout 8h;
+    }
+    
+    # Serve misc files
+    location /files {
+        alias /files-docker;
+        autoindex on;
+    }
+
+    # Serve syncthing files
+    location /sync {
+        auth_basic "nope definitely not today buddy";
+        auth_basic_user_file /config/nginx/sync-htpasswd;
+        alias /sync-docker;
+        autoindex on;
+    }
+}

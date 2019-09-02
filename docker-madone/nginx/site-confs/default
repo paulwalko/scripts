@@ -4,13 +4,26 @@
 # This is the main file that will be pe present no matter what
 # Individual sites are specified in /config/nginx/sites/*.enabled
 
-# Redirect HTTP traffic to HTTPS
+# Redirect unknown HTTP traffic to https://seaturtle.pw
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
     server_name _;
+    
+    return 301 https://seaturtle.pw;
+}
 
-    return 301 https://$host$request_uri;
+# Redirect unknown HTTPS traffic to https://seaturtle.pw
+# If we don't have a cert for the site the client get an error but that's fine
+server {
+    listen 443 default_server;
+    listen [::]:443 default_server;
+    server_name _;
+
+    # ssl conf
+    include /config/nginx/ssl.conf;
+    
+    return 301 https://seaturtle.pw;
 }
 
 # Enabled sites are included in /config/nginx/nginx.conf
