@@ -3,7 +3,7 @@ server {
     listen [::]:80;
     server_name madone.seaturtle.pw;
 
-    return 301 https://seaturtle.pw$request_uri;
+    return 301 https://madone.seaturtle.pw$request_uri;
 }
 
 server {
@@ -48,4 +48,6 @@ server {
         alias /sync-docker;
         autoindex on;
     }
+
+    # Proxy everything else???
 }

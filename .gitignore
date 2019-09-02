@@ -5,3 +5,6 @@ docker-fogcutter/nginx/config
 docker-fogcutter/plex/config
 docker-fogcutter/syncthing/config
 docker-fogcutter/syncthing/sync
+docker-madone/nginx/config
+docker-madone/syncthing/config
+docker-madone/syncthing/sync
