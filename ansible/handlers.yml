@@ -1,9 +1,4 @@
 ---
-- name: Restart systemd-logind service
-  service:
-    name: systemd-logind
-    state: restarted
-
 - name: Restart chrony service
   service:
     name: chrony
@@ -13,6 +8,16 @@
   service:
     name: sshd
     state: restarted
+
+- name: Restart systemd-logind service
+  service:
+    name: systemd-logind
+    state: restarted
+
+- name: Enable weechat service
+  service:
+    name: weechat
+    enabled: yes
 
 - name: Re-export exportfs
   command: exportfs -arv

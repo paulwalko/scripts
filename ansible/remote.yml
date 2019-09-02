@@ -1,7 +1,7 @@
 # All hosts are debian 10
 ---
-# Common
-- hosts: compute,nfs,router
+# remote
+- hosts: remote
   become: yes
   handlers:
     - import_tasks: handlers.yml
@@ -11,18 +11,24 @@
       apt:
         name:
           - apt-listchanges
+          - apt-transport-https
+          - ca-certificates
           - chrony
           - curl
           - git
+          - gnupg2
           - htop
           - iperf3
           - mosh
           - nmap
           - oidentd
+          - software-properties-common
           - speedtest-cli
           - tmux
           - unattended-upgrades
           - vim
+          - weechat
+          - zsh
         force_apt_get: yes
         update_cache: yes
 
@@ -65,15 +71,6 @@
         mode: '0644'
       notify: Restart systemd-logind service
 
-    - name: Set chrony ntp servers
-      copy:
-        src: files/chrony.conf
-        dest: /etc/chrony/chrony.conf
-        owner: root
-        group: root
-        mode: '0644'
-      notify: Restart chrony service
-
     # Core networking
     - name: Configure sshd_config to listen on 2222/22 and disable password auth
       copy:
@@ -94,90 +91,6 @@
         group: root
         mode: '0644'
 
-### Router
-##- hosts: router
-##  become: yes
-##  tasks:
-##    - name: Install frrouting and related router packages
-##    - name: Configure bgp, etc???
-
-# Media networking (Wireguard VPN, NFS)
-- hosts: compute,nfs
-  become: yes
-  handlers:
-    - import_tasks: handlers.yml
-  tasks:
-    - name: Add unstable repository
-      shell: |
-        echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/unstable.list
-        printf 'Package: *\nPin: release a=unstable\nPin-Priority: 90\n' > /etc/apt/preferences.d/limit-unstable
-      args:
-        creates: /etc/apt/sources.list.d/unstable.list
-
-    - name: Install media networking packages
-      apt:
-        name:
-          - nfs-common
-          - wireguard
-        force_apt_get: yes
-        update_cache: yes
-
-    # Manually do wireguard config https://wiki.debian.org/Wireguard
-
-# NFS core config
-# ASSUMES /bigdata IS CONFIGURED (make sure dir is 755)
-- hosts: nfs
-  become: yes
-  handlers:
-    - import_tasks: handlers.yml
-  tasks:
-    - name: Install NFS server package
-      apt:
-        name: nfs-kernel-server
-        force_apt_get: yes
-        update_cache: yes
-
-    - name: Export /bigdata
-      copy:
-        src: files/exports
-        dest: /etc/exports
-        owner: root
-        group: root
-        mode: '0644'
-      notify: Re-export exportfs
-
-# Compute core config
-- hosts: compute
-  become: yes
-  tasks:
-    - name: Install Docker + compute dependencies
-      apt:
-        name:
-          - apt-transport-https
-          - ca-certificates
-          - gnupg2
-          - software-properties-common
-          - sshfs
-        force_apt_get: yes
-        update_cache: yes
-
-    - name: Mount bigdummy /bigdata via NFS
-      mount:
-        src: 10.200.0.202:/bigdata
-        path: /bigdata
-        fstype: nfs
-        opts: soft,nodev,nosuid
-        state: mounted
-
-    # Might require running manually mounting
-    - name: Mount vtluug /media via sshfs
-      mount:
-        src: pew-media@dirtycow.vtluug.org:/nfs/cistern/share/media
-        path: /media-vtluug
-        fstype: fuse.sshfs
-        opts: allow_other,ro,_netdev,IdentityFile=/home/paul/.ssh/id_rsa_fast
-        state: mounted
-
     - name: Add Docker GPG key
       apt_key:
         url: https://download.docker.com/linux/debian/gpg
@@ -195,10 +108,19 @@
         force_apt_get: yes
         update_cache: yes
 
-    - name: Add paul to docker group
+    - name: Add joe to docker group
       user:
-        name: paul
+        name: joe
         groups: docker
         append: yes
+
+    - name: Install weechat systemd service
+      copy:
+        src: files/weechat.service
+        dest: /etc/systemd/system/weechat.service
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Enable weechat service
     
     # Clone docker repo to start services
