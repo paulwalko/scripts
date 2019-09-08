@@ -7,14 +7,14 @@
 docker network create pew-monitoring-net
 
 # grafana-cli plugins install grafana-piechart-panel
-sudo chown 472:472 $PWD/grafana/{data,provisioning} \
+sudo chown 472:472 $PWD/grafana/{grafana-data,provisioning} \
 && \
 docker run \
     --name monitoring_grafana \
     --detach \
     --restart unless-stopped \
     --user 472 \
-    --volume $PWD/grafana/data:/var/lib/grafana:rw \
+    --volume $PWD/grafana/grafana-data:/var/lib/grafana:rw \
     --volume $PWD/grafana/provisioning:/etc/grafana/provisioning:rw \
     --publish 3000:3000 \
     --network pew-monitoring-net \
@@ -23,13 +23,13 @@ docker run \
 docker network connect pew-net monitoring_grafana
 
 #    --publish 9090:9090 \
-sudo chown nobody:nogroup $PWD/prometheus/data \
+sudo chown nobody:nogroup $PWD/prometheus/prometheus-data \
 && \
 docker run \
     --name monitoring_prometheus \
     --detach \
     --restart unless-stopped \
-    --volume $PWD/prometheus/data:/prometheus:rw \
+    --volume $PWD/prometheus/prometheus-data:/prometheus:rw \
     --volume $PWD/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro \
     --volume $PWD/prometheus/alert.rules:/etc/prometheus/alert.rules:ro \
     --network pew-monitoring-net \

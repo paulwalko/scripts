@@ -10,7 +10,7 @@ docker run \
     --env PUID=1000 \
     --env PGID=1000 \
     --env TZ=US/Easter \
-    --volume $PWD/config:/config \
+    --volume $PWD/airsonic-config:/config \
     --volume /bigdata/media/music:/media/music:ro \
     --volume /bigdata/media/playlists:/media/playlists:rw \
     --volume /bigdata/media/podcasts:/media/podcasts:rw \
