@@ -8,6 +8,6 @@ fogcutter/docker/syncthing/syncthing-config
 fogcutter/docker/syncthing/syncthing-sync
 fogcutter/docker/monitoring/grafana/grafana-data
 fogcutter/docker/monitoring/prometheus/prometheus-data
-madone/docker/nginx/config
-madone/docker/syncthing/config
-madone/docker/syncthing/sync
+madone/docker/nginx/nginx-config
+madone/docker/syncthing/syncthing-config
+madone/docker/syncthing/syncthing-sync

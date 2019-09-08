@@ -12,7 +12,7 @@ docker run \
     --env SUBDOMAINS=madone \
     --env VALIDATION=html \
     --env TZ=US/Eastern \
-    --volume $PWD/config:/config:rw \
+    --volume $PWD/nginx-config:/config:rw \
     --volume $PWD/nginx.conf:/config/nginx/nginx.conf:ro \
     --volume $PWD/site-confs:/config/nginx/site-confs:ro \
     --volume $PWD/../syncthing/sync:/sync-docker:ro \
