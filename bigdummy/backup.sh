@@ -18,4 +18,5 @@ fi
 ## Media
 rsync -avz -e "ssh -i /home/paul/.ssh/id_rsa_fast" --progress /bigdata/media/music/ pew-media@dirtycow.vtluug.org:/nfs/cistern/share/media/music/pew-media/
 ## Misc
-rsync -avz -e "ssh -i /home/paul/.ssh/id_rsa_fast" --progress /bigdata/backups/ pew-media@dirtycow.vtluug.org:/nfs/cistern/home/pew-media/PEW-BACKUPS
+rsync -avz -e "ssh -i /home/paul/.ssh/id_rsa_fast" --progress /bigdata/backups/ pew-media@dirtycow.vtluug.org:/nfs/cistern/home/pew-media/PEW-BACKUPS/
+rclone copy --progress /bigdata/backups/ vt-gdrive:PEW-BACKUPS/
