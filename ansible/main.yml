@@ -19,6 +19,7 @@
           - mosh
           - nmap
           - oidentd
+          - rsync
           - speedtest-cli
           - tmux
           - unattended-upgrades
