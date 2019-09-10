@@ -29,7 +29,7 @@
     - name: Disable MOTDs
       command: chmod -x /etc/update-motd.d/10-uname
       args:
-        warn: false
+        warn: no
 
     - name: Set MOTD
       copy:
@@ -131,6 +131,13 @@
   handlers:
     - import_tasks: handlers.yml
   tasks:
+    - name: Install rclone
+      apt:
+        deb: https://github.com/rclone/rclone/releases/download/v1.49.2/rclone-v1.49.2-linux-amd64.deb
+        force_apt_get: yes
+
+    # Manually configure rclone
+
     - name: Install NFS server package
       apt:
         name: nfs-kernel-server

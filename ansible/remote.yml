@@ -35,7 +35,7 @@
     - name: Disable MOTDs
       command: chmod -x /etc/update-motd.d/10-uname
       args:
-        warn: false
+        warn: no
 
     - name: Set MOTD
       copy:
