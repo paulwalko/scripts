@@ -32,6 +32,11 @@ server {
         proxy_pass https://paulwalko.github.io;
     }
 
+    # Proxy grafana
+    location /grafana/ {
+        proxy_pass http://monitoring_grafana:3000/;
+    }
+
     # Proxy syncthing
     location /syncthing/ {
         auth_basic "not today buddy";

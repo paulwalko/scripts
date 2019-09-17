@@ -13,16 +13,16 @@ docker run \
     --name monitoring_grafana \
     --detach \
     --restart unless-stopped \
+    --env GF_SERVER_DOMAIN="seaturtle.pw" \
+    --env GF_SERVER_ROOT_URL="%(protocol)s://%(domain)s/grafana/" \
     --user 472 \
     --volume $PWD/grafana/grafana-data:/var/lib/grafana:rw \
     --volume $PWD/grafana/provisioning:/etc/grafana/provisioning:rw \
-    --publish 3000:3000 \
     --network pew-monitoring-net \
     grafana/grafana:6.3.5 \
 && \
 docker network connect pew-net monitoring_grafana
 
-#    --publish 9090:9090 \
 sudo chown nobody:nogroup $PWD/prometheus/prometheus-data \
 && \
 docker run \
