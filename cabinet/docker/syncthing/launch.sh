@@ -13,4 +13,4 @@ docker run \
     --publish 8384:8384 \
     --publish 22000:22000 \
     --publish 21027:21027/udp \
-    linuxserver/syncthing:latest
+    linuxserver/syncthing:v1.3.0-ls20
