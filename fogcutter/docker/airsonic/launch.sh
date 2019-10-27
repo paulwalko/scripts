@@ -16,4 +16,4 @@ docker run \
     --volume /bigdata/media/podcasts:/media/podcasts:rw \
     --volume /media-vtluug:/media/media-vtluug:ro \
     --network pew-net \
-    linuxserver/airsonic:latest
+    linuxserver/airsonic:v10.4.1-ls36
