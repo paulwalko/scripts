@@ -15,4 +15,4 @@ docker run \
     --volume /bigdata/media/music:/media/music:ro \
     --volume /media-vtluug:/media/media-vtluug:ro \
     --network host \
-    linuxserver/plex:1.18.0.1944-f2cae8d6b-ls60
+    linuxserver/plex:1.18.2.2058-e67a4e892-ls68

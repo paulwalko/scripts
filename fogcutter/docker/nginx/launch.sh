@@ -25,4 +25,4 @@ docker run \
     --publish [2601:5c0:c100:6e65:96c6:91ff:feab:69e3]:80:80 \
     --publish [2601:5c0:c100:6e65:96c6:91ff:feab:69e3]:443:443 \
     --network pew-net \
-    linuxserver/letsencrypt:latest
+    linuxserver/letsencrypt:0.40.1-ls77
