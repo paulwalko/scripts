@@ -4,6 +4,11 @@
     name: chrony
     state: restarted
 
+- name: Restart postfix
+  service:
+    name: postfix
+    state: restarted
+
 - name: Restart sshd service
   service:
     name: sshd
@@ -12,6 +17,11 @@
 - name: Restart systemd-logind service
   service:
     name: systemd-logind
+    state: restarted
+
+- name: Restart zfs-zed
+  service:
+    name: zfs-zed
     state: restarted
 
 - name: Enable weechat service

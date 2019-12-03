@@ -134,18 +134,41 @@
   handlers:
     - import_tasks: handlers.yml
   tasks:
+    - name: Install zfs-zed, postfix, nfs-kernel-server
+      apt:
+        name:
+          - nfs-kernel-server
+          - postfix
+          - zfs-zed
+        force_apt_get: yes
+        update_cache: yes
+
+    - name: Configure postfix
+      copy:
+        src: files/bigdummy-main.cf
+        dest: /etc/postfix/main.cf
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Restart postfix
+
+    # Manually set postfix password
+
+    - name: Configure zfs-zed
+      copy:
+        src: files/zed.rc
+        dest: /etc/zfs/zed.d/zed.rc
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Restart zfs-zed
+
     - name: Install rclone
       apt:
         deb: https://github.com/rclone/rclone/releases/download/v1.49.2/rclone-v1.49.2-linux-amd64.deb
         force_apt_get: yes
 
-    # Manually configure rclone
-
-    - name: Install NFS server package
-      apt:
-        name: nfs-kernel-server
-        force_apt_get: yes
-        update_cache: yes
+    # Manually configure rclone remote drive
 
     - name: Export /bigdata
       copy:
