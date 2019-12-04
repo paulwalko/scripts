@@ -1,9 +1,10 @@
 Assumes:
 
-- ALl:
+- All:
   - OS (Debian) has been installed and IPs have been configured in hosts.cfg
   - Host is already trusted via ssh and can be ssh'd into using keys
   - Passwordless sudo is enabled for the user ansible uses
+  - Root and user pw is something memorable
 
 - Wireguard hosts:
   - Secure boot is disabled (wireguard is an unsigned module)

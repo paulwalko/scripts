@@ -13,6 +13,7 @@
           - apt-listchanges
           - chrony
           - curl
+          - dma
           - git
           - htop
           - iperf3
@@ -20,6 +21,7 @@
           - nmap
           - oidentd
           - rsync
+          - smartmontools
           - speedtest-cli
           - tmux
           - unattended-upgrades
@@ -95,6 +97,26 @@
         group: root
         mode: '0644'
 
+    - name: Configure dma
+      copy:
+        src: files/dma.conf
+        dest: /etc/dma/dma.conf
+        owner: root
+        group: mail
+        mode: '0640'
+
+    - debug:
+        msg: 'Manually configure /etc/dma/auth.conf'
+
+    - name: Configure smartd
+      copy:
+        src: files/smartd.conf
+        dest: /etc/smartd.conf
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Restart and enable smartd
+
 ### Router
 ##- hosts: router
 ##  become: yes
@@ -124,8 +146,10 @@
         force_apt_get: yes
         update_cache: yes
 
-    # Manually do wireguard config https://wiki.debian.org/Wireguard
-    # Manuall do beets config https://wiki.archlinux.org/index.php/Beets
+    - debug:
+        msg:
+          - Manually do wireguard config https://wiki.debian.org/Wireguard
+          - Manuall do beets config https://wiki.archlinux.org/index.php/Beets
 
 # NFS core config
 # ASSUMES /bigdata IS CONFIGURED (make sure dir is 755)
@@ -134,25 +158,14 @@
   handlers:
     - import_tasks: handlers.yml
   tasks:
-    - name: Install zfs-zed, postfix, nfs-kernel-server
+    - name: Install zfs-zed, dma, and nfs-kernel-server
       apt:
         name:
+          - dma
           - nfs-kernel-server
-          - postfix
           - zfs-zed
         force_apt_get: yes
         update_cache: yes
-
-    - name: Configure postfix
-      copy:
-        src: files/bigdummy-main.cf
-        dest: /etc/postfix/main.cf
-        owner: root
-        group: root
-        mode: '0644'
-      notify: Restart postfix
-
-    # Manually set postfix password
 
     - name: Configure zfs-zed
       copy:
@@ -163,12 +176,20 @@
         mode: '0644'
       notify: Restart zfs-zed
 
+    - name: Install weekly bigdata scrub cron job
+      cron:
+        name: 'Scrub bigdata zfs pool'
+        special_time: weekly
+        job: 'zpool scrub bigdata'
+        user: root
+
     - name: Install rclone
       apt:
         deb: https://github.com/rclone/rclone/releases/download/v1.49.2/rclone-v1.49.2-linux-amd64.deb
         force_apt_get: yes
 
-    # Manually configure rclone remote drive
+    - debug:
+        msg: Manually configure rclone remote drive
 
     - name: Export /bigdata
       copy:
@@ -233,5 +254,6 @@
         name: paul
         groups: docker
         append: yes
-    
-    # Clone docker repo to start services
+
+    - debug:
+        msg: Clone docker repo to start services
