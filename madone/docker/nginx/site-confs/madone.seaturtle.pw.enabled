@@ -16,6 +16,12 @@ server {
 
     client_max_body_size 1M;
 
+    # Purposefully do not proxy main site because there's no reason somone
+    #  should be using this domain name
+    location / {
+        return 301 https://example.com;
+    }
+
     # Proxy syncthing
     location /syncthing/ {
         auth_basic "not today buddy";
