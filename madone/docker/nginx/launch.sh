@@ -10,6 +10,7 @@ docker run \
     --env URL=seaturtle.pw \
     --env ONLY_SUBDOMAINS=true \
     --env SUBDOMAINS=madone \
+    --env EXTRA_DOMAINS=paul.walko.org,walko.org \
     --env VALIDATION=html \
     --env TZ=US/Eastern \
     --volume $PWD/nginx-config:/config:rw \
