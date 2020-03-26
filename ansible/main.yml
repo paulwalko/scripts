@@ -1,7 +1,7 @@
 # All hosts are debian 10
 ---
 # Common
-- hosts: compute,nfs,router
+- hosts: daily,compute,nfs,router
   become: yes
   handlers:
     - import_tasks: handlers.yml
@@ -51,7 +51,7 @@
         group: root
         mode: '0644'
 
-    - name: Enable unattended-upgrades
+    - name: Enable auto-upgrades
       copy:
         src: files/20auto-upgrades
         dest: /etc/apt/apt.conf.d/20auto-upgrades
@@ -78,7 +78,7 @@
       notify: Restart chrony service
 
     # Core networking
-    - name: Configure sshd_config to listen on 2222/22 and disable password auth
+    - name: Configure sshd_config to listen on 37121/2222/22 and disable password auth
       copy:
         src: files/sshd_config
         dest: /etc/ssh/sshd_config

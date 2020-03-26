@@ -1,3 +1,5 @@
+Usage: `ansible-playbook main.yml -i hosts.cfg --limit=cabinet`
+
 Assumes:
 
 - All:
