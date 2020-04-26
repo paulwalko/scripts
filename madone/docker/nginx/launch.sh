@@ -21,5 +21,4 @@ docker run \
     --publish 51.159.29.122:443:443 \
     --publish [2001:bc8:6005:19:208:a2ff:fe0c:917c]:80:80 \
     --publish [2001:bc8:6005:19:208:a2ff:fe0c:917c]:443:443 \
-    --network pew-net \
-    linuxserver/letsencrypt:latest
+    linuxserver/letsencrypt:1.3.0-ls110
