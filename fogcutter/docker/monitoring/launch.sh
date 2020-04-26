@@ -19,7 +19,7 @@ docker run \
     --volume $PWD/grafana/grafana-data:/var/lib/grafana:rw \
     --volume $PWD/grafana/provisioning:/etc/grafana/provisioning:rw \
     --network pew-monitoring-net \
-    grafana/grafana:6.3.7 \
+    grafana/grafana:6.7.3 \
 && \
 docker network connect pew-net monitoring_grafana
 
@@ -33,7 +33,7 @@ docker run \
     --volume $PWD/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro \
     --volume $PWD/prometheus/alert.rules:/etc/prometheus/alert.rules:ro \
     --network pew-monitoring-net \
-    prom/prometheus:v2.14.0 --config.file=/etc/prometheus/prometheus.yml \
+    prom/prometheus:v2.17.2 --config.file=/etc/prometheus/prometheus.yml \
                             --storage.tsdb.path=/prometheus \
                             --storage.tsdb.retention.size=200GB
 
