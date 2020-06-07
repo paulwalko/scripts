@@ -163,6 +163,7 @@
         name:
           - dma
           - nfs-kernel-server
+          - zfs-auto-snapshot
           - zfs-zed
         force_apt_get: yes
         update_cache: yes
