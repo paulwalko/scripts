@@ -10,7 +10,7 @@ docker run \
     --env PGID=1000 \
     --env EMAIL=sysadmin@seaturtle.pw \
     --env URL=seaturtle.pw \
-    --env SUBDOMAINS=airsonic,plex,www \
+    --env SUBDOMAINS=airsonic,git,plex,www \
     --env VALIDATION=html \
     --env TZ=US/Eastern \
     --volume $PWD/nginx-config:/config:rw \

@@ -1,0 +1,22 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name git.seaturtle.pw;
+
+    return 301 https://git.seaturtle.pw$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name git.seaturtle.pw;
+
+    # ssl conf
+    include /config/nginx/ssl.conf;
+
+    # Proxy gitea
+    # https://docs.gitea.io/en-us/reverse-proxies/
+    location / {
+        proxy_pass http://gitea:3000;
+    }
+}
