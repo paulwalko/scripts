@@ -19,7 +19,7 @@ docker run \
     --volume /bigdata/files:/files-docker:ro \
     --publish 10.42.0.203:80:80 \
     --publish 10.42.0.203:443:443 \
-    --publish [2601:5c0:c100:13b1:96c6:91ff:feab:69e3]:80:80 \
-    --publish [2601:5c0:c100:13b1:96c6:91ff:feab:69e3]:443:443 \
+    --publish [2601:5c0:c280:80de:96c6:91ff:feab:69e3]:80:80 \
+    --publish [2601:5c0:c280:80de:96c6:91ff:feab:69e3]:443:443 \
     --network pew-net \
     linuxserver/letsencrypt:1.3.0-ls110
